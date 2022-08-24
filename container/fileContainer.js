@@ -35,15 +35,31 @@ class FileContainer {
   }
 
   async saveInFile(element) {
-    try {
-      const data = await this.readFile();
-      const id = data.length == 0 ? 1 : data[data.length - 1].id + 1;
-      const objectToAdd = { ...element, id: id };
-      const newData = [...data, objectToAdd];
-      await fs.promises.writeFile(this.path, JSON.stringify(newData, null, 2));
-      return objectToAdd;
-    } catch (error) {
-      throw new Error("Error al guardar archivo");
+    if (element.id) {
+      try {
+        const data = await this.readFile();
+        const newData = [...data, element];
+        await fs.promises.writeFile(
+          this.path,
+          JSON.stringify(newData, null, 2)
+        );
+      } catch (error) {
+        throw new Error("Error al guardar archivo con id");
+      }
+    } else {
+      try {
+        const data = await this.readFile();
+        const id = data.length == 0 ? 1 : Number(data[data.length - 1].id) + 1;
+        const objectToAdd = { ...element, id: id };
+        const newData = [...data, objectToAdd];
+        await fs.promises.writeFile(
+          this.path,
+          JSON.stringify(newData, null, 2)
+        );
+        return objectToAdd;
+      } catch (error) {
+        throw new Error("Error al guardar archivo");
+      }
     }
   }
 

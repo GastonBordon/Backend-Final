@@ -1,56 +1,77 @@
 [
   {
-    "title": "sandia",
-    "price": 1000,
-    "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_melancia-256.png",
-    "id": "1"
-  },
-  {
     "title": "pera",
     "price": 500,
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
-    "id": "2"
+    "id": 2
   },
   {
     "title": "coco",
     "price": "1500",
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_coco-256.png",
-    "id": "3"
+    "id": 3
   },
   {
     "title": "uvas",
     "price": "1250",
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_amoras-256.png",
-    "id": "4"
+    "id": 4
   },
   {
     "title": "durazno",
     "price": "900",
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_pessego-256.png",
-    "id": "5"
+    "id": 5
   },
   {
     "title": "frutillas",
     "price": "1700",
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_morango-256.png",
-    "id": "6"
+    "id": 6
   },
   {
     "title": "banana",
     "price": "670",
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_banana-256.png",
-    "id": "7"
+    "id": 7
   },
   {
     "title": "sandia",
     "price": 5000,
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_melancia-256.png",
-    "id": "71"
+    "id": 8
   },
   {
     "title": "sandia",
     "price": 5000,
     "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_melancia-256.png",
-    "id": "711"
+    "id": 9
+  },
+  {
+    "title": "pera",
+    "price": 500,
+    "description": "y que pera!",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
+    "stock": 8,
+    "codigo": "per1661313065814",
+    "timestamp": 1661313065814,
+    "id": null
+  },
+  {
+    "title": "pera",
+    "price": 500,
+    "description": "y que pera!",
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
+    "stock": 8,
+    "codigo": "per1661313111251",
+    "timestamp": 1661313111251,
+    "id": null
+  },
+  {
+    "title": "sandia",
+    "price": 8996623,
+    "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_melancia-256.png",
+    "id": 1,
+    "timestamp": 1661313439044
   }
 ]

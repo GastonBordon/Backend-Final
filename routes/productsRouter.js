@@ -5,17 +5,19 @@ const router = express.Router();
 let userAdmin = false;
 
 function validateProduct(req, res, next) {
-  const { title, description, price, img } = req.body;
+  const { title, description, price, thumbnail, stock } = req.body;
 
-  if (!title || !description || !price || !img) {
+  if (!title || !description || !price || !thumbnail || !stock) {
     res.json({ Error: "Faltan datos del producto" });
   } else if (isNaN(price)) {
     res.json({ Error: "El precio del producto debe ser de tipo number" });
+  } else {
+    req.title = title;
+    req.description = description;
+    req.price = price;
+    req.thumbnail = thumbnail;
+    req.stock = stock;
   }
-  req.title = title;
-  req.description = description;
-  req.price = price;
-  req.img = img;
   next();
 }
 
@@ -44,7 +46,7 @@ router.get("/:id?", async (req, res) => {
       data: products,
     });
   } else {
-    let foundProduct = await productsContainer.getById(req.params.id);
+    let foundProduct = await productsContainer.getById(Number(req.params.id));
     if (!foundProduct) {
       res.status(404).json({
         error: "NOT FOUND 404 !! no existe ese ID",
@@ -58,14 +60,17 @@ router.get("/:id?", async (req, res) => {
 });
 
 router.post("/", validateAdmin, validateProduct, async (req, res) => {
-  let newProduct = await productsContainer.saveInFile(req.body);
+  const timestamp = Date.now();
+  let codigo = req.body.title.slice(0, 3) + timestamp;
+  let product = { ...req.body, codigo, timestamp: timestamp };
+  let newProduct = await productsContainer.saveInFile(product);
   res.json({
     data: newProduct,
   });
 });
 
 router.put("/:id", validateAdmin, async (req, res) => {
-  let foundProduct = await productsContainer.getById(req.params.id);
+  let foundProduct = await productsContainer.getById(Number(req.params.id));
   if (!foundProduct) {
     res.status(404).json({
       error: "NOT FOUND 404!! producto no encontrado!!",
@@ -79,8 +84,9 @@ router.put("/:id", validateAdmin, async (req, res) => {
         }
       }
     }
-    await productsContainer.deleteById(req.params.id);
-    await productsContainer.saveInFile(req.params.id);
+    foundProduct.timestamp = Date.now();
+    await productsContainer.deleteById(Number(req.params.id));
+    await productsContainer.saveInFile(foundProduct);
 
     res.json({
       msg: "El producto fue modificado correctamente",
@@ -89,13 +95,13 @@ router.put("/:id", validateAdmin, async (req, res) => {
 });
 
 router.delete("/:id", validateAdmin, async (req, res) => {
-  let foundProduct = await productsContainer.getById(req.params.id);
+  let foundProduct = await productsContainer.getById(Number(req.params.id));
   if (!foundProduct) {
     res.status(404).json({
       error: "NOT FOUND 404!!! producto no encontrado",
     });
   } else {
-    await productsContainer.deleteById(req.params.id);
+    await productsContainer.deleteById(Number(req.params.id));
     res.json({
       msg: "Se ha eliminado el producto correctamente",
     });

@@ -4,45 +4,79 @@ const cartContainer = require("../controllers/cartHandler.js");
 const productsContainer = require("../controllers/productHandler.js");
 
 router.post("/", async (req, res) => {
-  const cartWithId = await cartContainer.saveInFile();
+  let cart = { timestamp: Date.now() };
+
+  const cartWithId = await cartContainer.saveInFile(cart);
 
   res.json({
-    data: cartWithId,
+    id: cartWithId.id,
   });
 });
 
 router.delete("/:id", async (req, res) => {
-  await cartContainer.deleteById(req.params.id);
+  try {
+    await cartContainer.deleteById(Number(req.params.id));
+    res.json({
+      msg: "Carrito Eliminado",
+    });
+  } catch {
+    res.json({
+      error: "Carrito no encontrado",
+    });
+  }
 });
 
 router.get("/:id/productos", async (req, res) => {
-  const cart = await cartContainer.getById(req.params.id);
-  res.json({
-    data: cart.products,
-  });
+  try {
+    const cart = await cartContainer.getById(Number(req.params.id));
+    res.json({
+      data: cart.products,
+    });
+  } catch {
+    res.json({
+      error: "Carrito no encontrado",
+    });
+  }
 });
 
 router.post("/:id/productos", async (req, res) => {
-  const cart = await cartContainer.getById(req.params.id);
-  const product = await productsContainer.getById(req.body.id);
-  cart.products.push(product);
-  await cartContainer.readFile();
-  res.send(console.log(`Producto agregado al carrito ${req.params.id}`));
+  try {
+    const cart = await cartContainer.getById(Number(req.params.id));
+    const product = await productsContainer.getById(Number(req.body.id));
+    if (!product) {
+      res.json({
+        error: `No existe producto con ese ID`,
+      });
+    } else {
+      if (cart.products) {
+        cart.products.push(product);
+      } else {
+        cart.products = [product];
+      }
+      await cartContainer.deleteById(Number(req.params.id));
+      await cartContainer.saveInFile(cart);
+      res.json({ msg: `Producto agregado al carrito ${req.params.id}` });
+    }
+  } catch {
+    res.json({
+      error: `Error al agregar producto`,
+    });
+  }
 });
 
 router.delete("/:id/productos/:id_prod", async (req, res) => {
   //ELIMINAR UN PRODUCTO DEL CARRITO POR SU ID DE CARRITO Y ID DE PRODUCTO
-  const cart = await cartContainer.getById(req.params.id);
+  const cart = await cartContainer.getById(Number(req.params.id));
+  console.log(cart);
 
   let newListProducts = [];
-  newListProducts = cart.productos.filter(
-    (product) => product.id != req.params.id_prod
+  newListProducts = cart.products.filter(
+    (product) => product.id != Number(req.params.id_prod)
   );
-  cart.productos = newListProducts;
-
-  await cartContainer.updateFile(cart);
-
-  res.send(console.log("Producto eliminado del carrito correctamente"));
+  cart.products = newListProducts;
+  await cartContainer.deleteById(Number(req.params.id));
+  await cartContainer.saveInFile(cart);
+  res.json({ msg: "Producto eliminado del carrito correctamente" });
 });
 
 module.exports = router;
