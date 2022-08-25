@@ -4,13 +4,18 @@ const cartContainer = require("../controllers/cartHandler.js");
 const productsContainer = require("../controllers/productHandler.js");
 
 router.post("/", async (req, res) => {
-  let cart = { timestamp: Date.now() };
+  try {
+    let cart = { timestamp: Date.now() };
+    const cartWithId = await cartContainer.saveInFile(cart);
 
-  const cartWithId = await cartContainer.saveInFile(cart);
-
-  res.json({
-    id: cartWithId.id,
-  });
+    res.json({
+      id: cartWithId.id,
+    });
+  } catch {
+    res.json({
+      msg: "Error No se pudo crear el carrito",
+    });
+  }
 });
 
 router.delete("/:id", async (req, res) => {
@@ -66,17 +71,28 @@ router.post("/:id/productos", async (req, res) => {
 
 router.delete("/:id/productos/:id_prod", async (req, res) => {
   //ELIMINAR UN PRODUCTO DEL CARRITO POR SU ID DE CARRITO Y ID DE PRODUCTO
-  const cart = await cartContainer.getById(Number(req.params.id));
-  console.log(cart);
-
-  let newListProducts = [];
-  newListProducts = cart.products.filter(
-    (product) => product.id != Number(req.params.id_prod)
-  );
-  cart.products = newListProducts;
-  await cartContainer.deleteById(Number(req.params.id));
-  await cartContainer.saveInFile(cart);
-  res.json({ msg: "Producto eliminado del carrito correctamente" });
+  try {
+    const cart = await cartContainer.getById(Number(req.params.id));
+    const product = await productsContainer.getById(Number(req.params.id));
+    if (!product) {
+      res.json({
+        error: `No existe producto con ese ID`,
+      });
+    } else {
+      let newListProducts = [];
+      newListProducts = cart.products.filter(
+        (product) => product.id != Number(req.params.id_prod)
+      );
+      cart.products = newListProducts;
+      await cartContainer.deleteById(Number(req.params.id));
+      await cartContainer.saveInFile(cart);
+      res.json({ msg: "Producto eliminado del carrito correctamente" });
+    }
+  } catch {
+    res.json({
+      msg: "Error al eliminar producto",
+    });
+  }
 });
 
 module.exports = router;

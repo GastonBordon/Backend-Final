@@ -17,8 +17,8 @@ function validateProduct(req, res, next) {
     req.price = price;
     req.thumbnail = thumbnail;
     req.stock = stock;
+    next();
   }
-  next();
 }
 
 function validateAdmin(req, res, next) {

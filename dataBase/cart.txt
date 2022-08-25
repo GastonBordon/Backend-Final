@@ -1,10 +1,130 @@
 [
   {
     "timestamp": 1661314954267,
-    "id": 1
+    "id": 1,
+    "products": [
+      {
+        "title": "pera",
+        "price": 500,
+        "description": "Las mejores peras del mercado",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_abacate-256.png",
+        "stock": 100,
+        "codigo": "per1661395635413",
+        "timestamp": 1661395635413,
+        "id": 1
+      },
+      {
+        "title": "coco",
+        "price": "1500",
+        "description": "Los cocos son enormes",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_coco-256.png",
+        "stock": 300,
+        "codigo": "coc1661395711513",
+        "timestamp": 1661395711513,
+        "id": 2
+      },
+      {
+        "title": "uvas",
+        "price": "1250",
+        "description": "Las uvas son muy dulces",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_amoras-256.png",
+        "stock": 500,
+        "codigo": "uva1661395769023",
+        "timestamp": 1661395769023,
+        "id": 3
+      },
+      {
+        "title": "durazno",
+        "price": "900",
+        "description": "Si te gusta el durazno, bancate la pelusa",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_pessego-256.png",
+        "stock": 700,
+        "codigo": "dur1661395868320",
+        "timestamp": 1661395868320,
+        "id": 4
+      }
+    ]
   },
   {
     "timestamp": 1661315645751,
-    "id": 2
+    "id": 2,
+    "products": [
+      {
+        "title": "durazno",
+        "price": "900",
+        "description": "Si te gusta el durazno, bancate la pelusa",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_pessego-256.png",
+        "stock": 700,
+        "codigo": "dur1661395868320",
+        "timestamp": 1661395868320,
+        "id": 4
+      },
+      {
+        "title": "frutillas",
+        "price": "1700",
+        "description": "Especiales para comer con crema",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_morango-256.png",
+        "stock": 380,
+        "codigo": "fru1661395926634",
+        "timestamp": 1661395926634,
+        "id": 5
+      },
+      {
+        "title": "uvas",
+        "price": "1250",
+        "description": "Las uvas son muy dulces",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_amoras-256.png",
+        "stock": 500,
+        "codigo": "uva1661395769023",
+        "timestamp": 1661395769023,
+        "id": 3
+      }
+    ]
+  },
+  {
+    "timestamp": 1661397335659,
+    "id": 3,
+    "products": [
+      {
+        "title": "uvas",
+        "price": "1250",
+        "description": "Las uvas son muy dulces",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_amoras-256.png",
+        "stock": 500,
+        "codigo": "uva1661395769023",
+        "timestamp": 1661395769023,
+        "id": 3
+      },
+      {
+        "title": "sandia",
+        "price": 5000,
+        "description": "Las sandías más cuadradas del mundo",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_melancia-256.png",
+        "stock": 900,
+        "codigo": "san1661396161450",
+        "timestamp": 1661396161450,
+        "id": 7
+      },
+      {
+        "title": "banana",
+        "price": "670",
+        "description": "Las más maduras del mercado",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_banana-256.png",
+        "stock": 650,
+        "codigo": "ban1661396055635",
+        "timestamp": 1661396055635,
+        "id": 6
+      },
+      {
+        "title": "coco",
+        "price": "1500",
+        "description": "Los cocos son enormes",
+        "thumbnail": "https://cdn3.iconfinder.com/data/icons/fruits-52/150/icon_fruit_coco-256.png",
+        "stock": 300,
+        "codigo": "coc1661395711513",
+        "timestamp": 1661395711513,
+        "id": 2
+      }
+    ]
   }
 ]
