@@ -1,8 +1,9 @@
 const express = require("express");
 const mainRouter = require("../routes/mainRouter.js");
+const dotenv = require("dotenv").config();
 
 const app = express();
-const PORT = 8080;
+const PORT = process.env.PORT;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -17,9 +18,9 @@ app.use((err, req, res, next) => {
   res.send(err);
 });
 
-// app.all("*", (req, res) => {
-//   res.status(404).json({ res: "Ruta no implementada" });
-// });
+app.all("*", (req, res) => {
+  res.status(404).json({ res: "Ruta no implementada" });
+});
 
 app.listen(PORT, () => {
   console.log(`Server is running on port: ${PORT}`);
